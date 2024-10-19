@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tripmates',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'trip.urls'
@@ -75,8 +80,12 @@ WSGI_APPLICATION = 'trip.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tripmates_db',         # Name of your MySQL database
+        'USER': 'root',           # MySQL username (or 'root' if using the root user)
+        'PASSWORD': 'nitinrinki7777',          # Password for the MySQL user
+        'HOST': 'localhost',             # Or '127.0.0.1'
+        'PORT': '3306',                  # Default MySQL port
     }
 }
 
@@ -121,3 +130,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'tripmates.AppUser'  # Replace 'yourapp' with the actual name of your Django app
+
+CORS_ALLOWED_ORIGINS = [
+      # React app (if using Create React App)
+    "http://localhost:5173",  # Vue app (if using Vue CLI)
+]
