@@ -1,0 +1,20 @@
+ <Route path="/" element={
+          <div>
+          <div className='mx-0 flex justify-center'><Navbar />
+          </div>
+          <div><Home />
+          </div>
+          <Match/>
+          </div>} />
+        {/* <Route path="/login" element={<div className='h-full mt-0 mb-0'><LogIn heading ="Welcome back to the TripMates Community" /></div>} /> */}
+        <Route path="/login" element={<div className='h-full mt-0 mb-0'><Questions heading ="Personalize Your Travel Experience" /></div>} />
+        <Route path="/match" element={<div >
+            <div className='mx-0 flex justify-center'><Navbar/></div>
+            <div>
+          <span className="text-black text-[50px] font-bold break-words font-poppins flex justify-center">
+            Find a Travel Buddy
+            </span>
+            </div>
+            <div><Match /></div></div>} />
+
+            <Route path="/SignUp" element={<div className='h-full mt-0 mb-0'><SignUp heading ="Welcome to the TripMates Community" /></div>} />
