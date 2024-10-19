@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'tripmates',
     'rest_framework',
     'corsheaders',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'trip.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tripmates_db',         # Name of your MySQL database
+        'NAME': 'new_db',         # Name of your MySQL database
         'USER': 'root',           # MySQL username (or 'root' if using the root user)
         'PASSWORD': 'nitinrinki7777',          # Password for the MySQL user
         'HOST': 'localhost',             # Or '127.0.0.1'
@@ -136,3 +137,32 @@ CORS_ALLOWED_ORIGINS = [
       # React app (if using Create React App)
     "http://localhost:5173",  # Vue app (if using Vue CLI)
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    
+}
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Access token validity
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Refresh token validity
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',  # Hashing algorithm
+    'SIGNING_KEY': SECRET_KEY,  # Use your Django secret key for signing tokens
+}
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Access token validity
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Refresh token validity
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',  # Hashing algorithm
+    'SIGNING_KEY': SECRET_KEY,  # Use your Django secret key for signing tokens
+}
+REST_FRAMEWORK_SIMPLEJWT = {
+    'USER_ID_FIELD': 'user_id',  # Use your custom user_id field
+}

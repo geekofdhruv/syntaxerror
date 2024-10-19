@@ -18,7 +18,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
-    user_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)  # Primary Key
     name = models.CharField(max_length=255)
     age = models.IntegerField()
     email = models.EmailField(unique=True)
@@ -35,6 +35,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
 class UserPersona(models.Model):
     persona_id = models.AutoField(primary_key=True)
     user = models.OneToOneField(AppUser, on_delete=models.CASCADE)
@@ -136,6 +137,16 @@ class Request(models.Model):
     def __str__(self):
         return f"{self.requester.name} requested {self.trip.place_to_travel}"
 
+class Notification(models.Model):
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    message = models.TextField()
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Notification for {self.user.username}: {self.message}"
+    
+
 class SuccessfulTrip(models.Model):
     successful_trip_id = models.AutoField(primary_key=True)
     trip = models.OneToOneField(Trip, on_delete=models.CASCADE)
@@ -144,4 +155,6 @@ class SuccessfulTrip(models.Model):
 
     def __str__(self):
         return f"Successful trip for {self.user.name} to {self.trip.place_to_travel}"
+
+
 

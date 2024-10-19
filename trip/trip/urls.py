@@ -15,6 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from tripmates.views import RequestListCreateView, RequestReceivedView
+from tripmates.views import RequestListCreateView, RequestReceivedView, AcceptRequestView, RejectRequestView
 
 from django.urls import path
 from tripmates.views import (
@@ -25,11 +27,15 @@ from tripmates.views import (
     TripListCreateView,
     TripDetailView,
     RequestListCreateView,
-    RequestDetailView,
+    
     SuccessfulTripListCreateView,
     SuccessfulTripDetailView,
 )
-
+from tripmates.views import CustomTokenObtainPairView
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', AppUserCreateView.as_view(), name='user-create'),
@@ -40,10 +46,16 @@ urlpatterns = [
     
     path('trips/', TripListCreateView.as_view(), name='trip-list-create'),
     path('trips/<int:pk>/', TripDetailView.as_view(), name='trip-detail'),
-    
+
     path('requests/', RequestListCreateView.as_view(), name='request-list-create'),
-    path('requests/<int:pk>/', RequestDetailView.as_view(), name='request-detail'),
+    path('requests/received/', RequestReceivedView.as_view(), name='request-received'),
     
     path('successful-trips/', SuccessfulTripListCreateView.as_view(), name='successful-trip-list-create'),
     path('successful-trips/<int:pk>/', SuccessfulTripDetailView.as_view(), name='successful-trip-detail'),
+
+    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('api/requests/<int:pk>/accept/', AcceptRequestView.as_view(), name='accept-request'),
+    path('api/requests/<int:pk>/reject/', RejectRequestView.as_view(), name='reject-request'),
 ]
