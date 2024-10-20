@@ -2,10 +2,10 @@ import React from 'react';
 
 const Hero = () => {
   const deals = [
-    { id: 1, name: 'Montriol', rating: 4.8, price: 549, image: '/api/placeholder/300/200' },
-    { id: 2, name: 'Flygone', rating: 4.5, price: 549, image: '/api/placeholder/300/200' },
-    { id: 3, name: 'Piqnic', rating: 4.7, price: 549, image: '/api/placeholder/300/200' },
-    { id: 4, name: 'Guideline', rating: 4.8, price: 549, image: '/api/placeholder/300/200' },
+    { id: 1, name: 'Montriol', rating: 4.8, price: 549, image: '/image1.jpg' },
+    { id: 2, name: 'Flygone', rating: 4.5, price: 549, image: '/image1.jpg' },
+    { id: 3, name: 'Piqnic', rating: 4.7, price: 549, image: '/image1.jpg' },
+    { id: 4, name: 'Guideline', rating: 4.8, price: 549, image: '/image1.jpg' },
   ];
   const cards = [
     {
@@ -28,8 +28,8 @@ const Hero = () => {
     <div>
     <div className="flex items-center justify-between p-8 bg-gray-100">
       <div className="w-1/2 pr-8">
-        <h1 className="text-4xl font-bold mb-4">Get started on finding your next TripMate with us.</h1>
-        <p className="text-lg mb-6">
+        <h1 className="text-6xl font-bold mb-4 w-[35vw]">Get started on finding your next TripMate with us.</h1>
+        <p className="text-xl mb-6 w-[40vw]">
           Discover amazing destinations and connect with fellow travelers. 
           Your next adventure is just a click away!
         </p>
@@ -41,7 +41,7 @@ const Hero = () => {
         <img 
           src="image1.jpg" 
           alt="Travel destination" 
-          className="w-full h-auto rounded-lg shadow-lg"
+          className="w-full h-[60%] rounded-lg shadow-lg"
         />
       </div>
     </div>

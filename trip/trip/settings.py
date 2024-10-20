@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
 ]
 
 ROOT_URLCONF = 'trip.urls'
@@ -146,23 +147,10 @@ REST_FRAMEWORK = {
 from datetime import timedelta
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Access token validity
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=100),  # Access token validity
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Refresh token validity
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'ALGORITHM': 'HS256',  # Hashing algorithm
     'SIGNING_KEY': SECRET_KEY,  # Use your Django secret key for signing tokens
-}
-from datetime import timedelta
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),  # Access token validity
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Refresh token validity
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True,
-    'ALGORITHM': 'HS256',  # Hashing algorithm
-    'SIGNING_KEY': SECRET_KEY,  # Use your Django secret key for signing tokens
-}
-REST_FRAMEWORK_SIMPLEJWT = {
-    'USER_ID_FIELD': 'user_id',  # Use your custom user_id field
 }

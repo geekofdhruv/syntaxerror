@@ -10,6 +10,7 @@ import SignUp from './components/signUp'
 import Questions from './components/questions'
 import ADDTrip from './components/AddTrip'
 import Footer from './components/Footer';
+import MyTrips from './components/mytips'
 import './App.css'
 import './index.css';
 
@@ -43,6 +44,9 @@ const App = () => {
             <Route path="/" element={<div><Footer/></div>}>
             </Route>
             <Route path="/questions" element={<div><Questions heading="Personalize Your Travel Experience"/></div>} />
+            <Route path="/trips" element={<div><div className='mx-0 flex justify-center'><Navbar/></div><div><MyTrips/></div><div><Footer/></div></div>} />
+            <Route path="/AddTrip" element={<div><div className='mx-0 flex justify-center'><Navbar/></div><div><ADDTrip/></div></div>} />
+            
       </Routes>
       
     </div>

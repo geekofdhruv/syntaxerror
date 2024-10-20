@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from tripmates.views import RequestListCreateView, RequestReceivedView
 from tripmates.views import RequestListCreateView, RequestReceivedView, AcceptRequestView, RejectRequestView
-
+from tripmates import views
 from django.urls import path
 from tripmates.views import (
     AppUserCreateView,
@@ -30,6 +30,7 @@ from tripmates.views import (
     
     SuccessfulTripListCreateView,
     SuccessfulTripDetailView,
+    get_logged_in_user,
 )
 from tripmates.views import CustomTokenObtainPairView
 from rest_framework_simplejwt.views import (
@@ -58,4 +59,7 @@ urlpatterns = [
 
     path('api/requests/<int:pk>/accept/', AcceptRequestView.as_view(), name='accept-request'),
     path('api/requests/<int:pk>/reject/', RejectRequestView.as_view(), name='reject-request'),
+
+    path('api/similar-users/<int:user_id>/', views.get_similar_users, name='get_similar_users'),
+    path('api/logged-in-user/', get_logged_in_user, name='get_logged_in_user'),
 ]

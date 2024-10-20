@@ -27,6 +27,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    first_login = models.BooleanField(default=True)
 
     objects = CustomUserManager()
 
@@ -34,7 +35,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['name', 'age']
 
     def __str__(self):
-        return self.email
+        return self.email 
 
 class UserPersona(models.Model):
     persona_id = models.AutoField(primary_key=True)
@@ -158,3 +159,18 @@ class SuccessfulTrip(models.Model):
 
 
 
+
+
+
+from django.db import models
+
+
+
+from django.db import models
+
+class Cluster(models.Model):
+    user = models.OneToOneField(UserPersona, on_delete=models.CASCADE)
+    cluster_id = models.IntegerField(default=0)  # Set default to 0
+
+    def __str__(self):
+        return f"Cluster {self.cluster_id} for {self.user}"
