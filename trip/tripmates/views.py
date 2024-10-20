@@ -83,9 +83,15 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 # AppUser Views
-class AppUserCreateView(generics.CreateAPIView):
+class AppUserCreateView(generics.ListCreateAPIView):
     queryset = AppUser.objects.all()
     serializer_class = AppUserSerializer
+    permission_classes = [AllowAny]
+
+    # Optionally, you can override the get_queryset method if you want to customize the data returned by the GET request
+    def get_queryset(self):
+        # Example: You could filter users based on some criteria or return all users
+        return AppUser.objects.all()
 
 class AppUserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = AppUser.objects.all()
@@ -132,6 +138,15 @@ class TripDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
     permission_classes = [AllowAny]
+
+class TripByUserView(generics.ListAPIView):  # ListAPIView is used to get a list of trips
+    serializer_class = TripSerializer
+    permission_classes = [IsAuthenticated]  # You can adjust this to your requirement
+
+    def get_queryset(self):
+      user_id = self.kwargs['user_id']
+      print(f"Fetching trips for user: {user_id}")  # Debugging
+      return Trip.objects.filter(user__id=user_id)
 
 # Request Views
 

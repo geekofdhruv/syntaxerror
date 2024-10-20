@@ -27,7 +27,7 @@ from tripmates.views import (
     TripListCreateView,
     TripDetailView,
     RequestListCreateView,
-    
+    TripByUserView,
     SuccessfulTripListCreateView,
     SuccessfulTripDetailView,
     get_logged_in_user,
@@ -47,6 +47,7 @@ urlpatterns = [
     
     path('trips/', TripListCreateView.as_view(), name='trip-list-create'),
     path('trips/<int:pk>/', TripDetailView.as_view(), name='trip-detail'),
+    path('trips/user/<int:user_id>/', TripByUserView.as_view(), name='trip-by-user'),
 
     path('requests/', RequestListCreateView.as_view(), name='request-list-create'),
     path('requests/received/', RequestReceivedView.as_view(), name='request-received'),

@@ -31,7 +31,27 @@ const LoginComponent = ({ heading }) => {
         refresh_token: localStorage.getItem('refresh_token'),
       });
 
-      // Step 4: Navigate to dashboard
+      // Step 2: Fetch all users to find the user ID
+      const userResponse = await axios.get('http://127.0.0.1:8000/users/', {
+        headers: {
+          'Authorization': `Bearer ${tokenResponse.data.access}`, // Include access token for authentication
+        },
+      });
+
+      console.log("All users fetched:", userResponse.data);
+      
+      // Step 3: Find the user with the matching email
+      const user = userResponse.data.find(user => user.email === email); // Adjust based on your user object structure
+      
+      if (user) {
+        const userId = user.id; // Assuming user object contains the 'id' field
+        localStorage.setItem('user_id', userId); // Save user ID to localStorage
+        console.log("User ID stored in localStorage:", userId);
+      } else {
+        console.error("No user found with that email.");
+      }
+
+      // Step 4: Navigate to questions page
       navigate('/questions');
     } catch (error) {
       console.error('Login failed', error.response?.data || error.message);
